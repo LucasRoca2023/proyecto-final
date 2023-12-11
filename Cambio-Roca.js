@@ -20,8 +20,9 @@ function Usuario(nombre, pass) {
         cancelButtonText: "No"
       }).then((result) => {
         if (result.isConfirmed) {
-          compra()
-          realizarCompra();
+          compra();
+          
+          
         }
       });
     } else {
@@ -85,46 +86,52 @@ function Usuario(nombre, pass) {
           const containerCompra = document.getElementById("container-compra");
           fetch(url)
          .then((respuesta)=> respuesta.json())
-         .then((data)=>console.table(data))
-    
-          fetch(url)
+         .then(data=>{
+                        const doll=data.result
+                
+            doll.forEach((dolar)=>{
+          fetch(dolar.url)
          .then((respuesta) => respuesta.json())
-         .then((data) => { 
+         .then((dataDolar) => { 
           const h1 = document.createElement("h1");
-         const labelDolar = document.createElement("label");
-         const inputDolar = document.createElement("input");
+        //  const labelDolar = document.createElement("label");
+        //  const inputDolar = document.createElement("input");
+         
          const labelPesos = document.createElement("label");
          const inputPesos = document.createElement("input");
          const botonCompra = document.createElement("button");
-        
-         h1.textContent = "Compra de dólares";
-         labelDolar.textContent = "Cantidad de dólar a comprar:";
+          
+         h1.textContent = dataDolar;
+        //  labelDolar.textContent = "Cantidad de dólar a comprar:";
+              
+              
          labelPesos.textContent = "Cantidad en pesos argentinos:";
-         inputDolar.type = "number";
+        //  inputDolar.type = "number";
          inputPesos.type = "number";
          botonCompra.textContent = "Realizar compra";
          botonCompra.addEventListener("click", realizarCompra);
 
          containerCompra.appendChild(h1);
-         containerCompra.appendChild(labelDolar);
-         containerCompra.appendChild(inputDolar);
+        //  containerCompra.appendChild(labelDolar);
+        //  containerCompra.appendChild(inputDolar);
          containerCompra.appendChild(labelPesos);
          containerCompra.appendChild(inputPesos);
          containerCompra.appendChild(botonCompra);
+         
 
 
 
-
-          })
+          })})})
           .catch((error) => console.error("Error al obtener los datos:", error));
-        }
-      function realizarCompra() {
-      montoDolar= inputDolar.value
-      montoArg= inputPesos.value
-      total= montoArg / montoDolar
-    
-      console.log("Compra realizada");
-    }
+      }
+    //     function realizarCompra() {
+    //       // montoDolar= inputDolar.value
+    //       // montoArg= inputPesos.value
+    //       // total= montoArg * compra
+    //       let cotizar= inputPesos.value 
+    //       total= cotizar
+    //       console.log("Compra realizada");
+    // }
       
             
         
